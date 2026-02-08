@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import PersonIcon from "@mui/icons-material/Person";
+import ParticleWave from "../ParticleWave";
 
 type HeroSplashAnimatedProps = {
   playIntro?: boolean;
@@ -20,7 +21,6 @@ export default function HeroSplashAnimated({
   const primaryDark = theme.palette.primary.dark;
   const textPrimary = theme.palette.text.primary;
   const textSecondary = theme.palette.text.secondary;
-  const blobColor = alpha(primaryMain, 0.28);
 
   return (
     <Box
@@ -30,8 +30,8 @@ export default function HeroSplashAnimated({
         playExit
           ? { opacity: 0, y: -32 }
           : playIntro
-          ? { opacity: 1, y: 0 }
-          : {}
+            ? { opacity: 1, y: 0 }
+            : {}
       }
       exit={{ opacity: 0, y: -32 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -46,60 +46,66 @@ export default function HeroSplashAnimated({
         overflow: "hidden",
       }}
     >
-      <Box
-        component={motion.div}
-        animate={{
-          width: ["480px", "700px", "480px"],
-          height: ["480px", "700px", "480px"],
-          filter: ["blur(110px)", "blur(160px)", "blur(110px)"],
-          background: [
-            `radial-gradient(circle at 30% 30%, ${blobColor} 0%, transparent 60%)`,
-            `radial-gradient(circle at 30% 30%, ${alpha(primaryMain, 0.48)} 0%, transparent 75%)`,
-            `radial-gradient(circle at 30% 30%, ${blobColor} 0%, transparent 60%)`,
-          ],
-        }}
-        transition={{
-          duration: 3.2,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatDelay: 0.4,
-        }}
-        sx={{
-          position: "absolute",
-          top: "-120px",
-          right: "-140px",
-          borderRadius: "50%",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-      <Box
-        component={motion.div}
-        animate={{
-          width: ["500px", "720px", "500px"],
-          height: ["500px", "720px", "500px"],
-          filter: ["blur(104px)", "blur(154px)", "blur(104px)"],
-          background: [
-            `radial-gradient(circle at 30% 30%, ${blobColor} 0%, transparent 65%)`,
-            `radial-gradient(circle at 30% 30%, ${alpha(primaryMain, 0.48)} 0%, transparent 78%)`,
-            `radial-gradient(circle at 30% 30%, ${blobColor} 0%, transparent 65%)`,
-          ],
-        }}
-        transition={{
-          duration: 3.2,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatDelay: 0,
-        }}
-        sx={{
-          position: "absolute",
-          bottom: "-100px",
-          left: "-130px",
-          borderRadius: "50%",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
+      <ParticleWave />
+      {[
+        { top: "10%", left: "10%", size: "200px", delay: 0, duration: 5 },
+        { top: "15%", right: "12%", size: "250px", delay: 1.2, duration: 6 },
+        {
+          bottom: "10%",
+          left: "15%",
+          size: "220px",
+          delay: 2.4,
+          duration: 4.5,
+        },
+        {
+          bottom: "20%",
+          right: "10%",
+          size: "180px",
+          delay: 0.8,
+          duration: 5.5,
+        },
+        { top: "40%", left: "-50px", size: "300px", delay: 3, duration: 7 },
+        {
+          bottom: "30%",
+          right: "-40px",
+          size: "280px",
+          delay: 1.8,
+          duration: 4.8,
+        },
+      ].map((blob, i) => (
+        <Box
+          key={i}
+          component={motion.div}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.4, 0.7, 0.4], // Increased opacity
+            filter: ["blur(40px)", "blur(60px)", "blur(40px)"],
+          }}
+          transition={{
+            duration: blob.duration,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatDelay: i * 0.2, // Deterministic delay
+            delay: blob.delay,
+          }}
+          sx={{
+            position: "absolute",
+            top: blob.top,
+            bottom: blob.bottom,
+            left: blob.left,
+            right: blob.right,
+            width: blob.size,
+            height: blob.size,
+            borderRadius: "50%",
+            background: `radial-gradient(circle, ${alpha(
+              primaryMain,
+              0.55, // Increased alpha
+            )} 0%, transparent 70%)`,
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+      ))}
 
       <Box sx={{ position: "relative", zIndex: 3, px: 2 }}>
         <Typography
@@ -186,7 +192,11 @@ export default function HeroSplashAnimated({
                 visible: {
                   opacity: 1,
                   y: 0,
-                  transition: { ease: "easeOut", duration: 1.2, delay: i * 0.18 },
+                  transition: {
+                    ease: "easeOut",
+                    duration: 1.2,
+                    delay: i * 0.18,
+                  },
                 },
               }}
               whileHover={{ scale: 1.22 }}
