@@ -43,11 +43,11 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
         bgcolor: "background.default",
         color: "text.primary",
         backgroundImage: `
-          radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
         `,
-        backgroundSize: "120px 120px, 120px 120px",
-        backgroundPosition: "0 0, 60px 60px",
+        backgroundSize: "100px 100px",
+        backgroundPosition: "center center",
         position: "relative",
         overflow: "hidden",
       }}
