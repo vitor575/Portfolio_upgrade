@@ -31,6 +31,7 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
 
   return (
     <Box
+      id="home"
       component={motion.section}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -89,55 +90,6 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
           }}
         />
       ))}
-      <Box
-        component={motion.div}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 10,
-          py: 4, // Padding top/bottom for the header
-        }}
-      >
-        <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end", // Align to right
-              alignItems: "center",
-            }}
-          >
-            {isMdUp && (
-              <Box sx={{ display: "flex", gap: 5 }}>
-                {["Home", "About", "Portfolio", "Contact"].map((item) => (
-                  <Typography
-                    key={item}
-                    component="a"
-                    href={`#${item.toLowerCase()}`}
-                    sx={{
-                      fontSize: "1.1rem",
-                      fontWeight: 500,
-                      color: "text.secondary",
-                      textDecoration: "none",
-                      position: "relative",
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        color: primaryMain,
-                      },
-                    }}
-                  >
-                    {item}
-                  </Typography>
-                ))}
-              </Box>
-            )}
-          </Box>
-        </Container>
-      </Box>
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Grid container spacing={6} alignItems="center">
@@ -325,26 +277,35 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   sx={{
                     position: "relative",
                     zIndex: 2,
-                    boxShadow: `0 4px 12px ${alpha(primaryMain, 0.12)}`,
-                    bgcolor: alpha(theme.palette.common.white, 0.02),
+                    width: 56, // Reduced from 64
+                    height: 56,
+                    borderRadius: 3,
+                    border: `1px solid ${alpha(primaryMain, 0.2)}`,
+                    boxShadow: `0 8px 20px ${alpha(primaryMain, 0.25)}`,
+                    bgcolor: alpha(theme.palette.common.white, 0.03),
+                    transition: "all 0.3s ease",
                     "&::after": {
                       content: '""',
                       position: "absolute",
-                      left: "-18%",
-                      top: "-18%",
-                      width: "136%",
-                      height: "136%",
-                      zIndex: 0,
-                      borderRadius: "50%",
-                      background: `radial-gradient(circle at center, ${alpha(primaryMain, 0.6)} 0%, transparent 45%)`,
-                      filter: "blur(12px)",
-                      opacity: 0.36,
-                      pointerEvents: "none",
+                      inset: 0,
+                      zIndex: -1,
+                      borderRadius: 3,
+                      background: `radial-gradient(circle at center, ${alpha(primaryMain, 0.4)} 0%, transparent 70%)`,
+                      filter: "blur(10px)",
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
                     },
-                    "&:hover::after": { opacity: 0.55 },
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                      boxShadow: `0 12px 28px ${alpha(primaryMain, 0.4)}`,
+                      borderColor: alpha(primaryMain, 0.5),
+                    },
+                    "&:hover::after": { opacity: 0.6 },
                   }}
+                  href="https://github.com/vitor575"
+                  target="_blank"
                 >
-                  <GitHubIcon />
+                  <GitHubIcon sx={{ fontSize: 28 }} /> {/* Reduced from 32 */}
                 </IconButton>
 
                 <IconButton
@@ -352,26 +313,35 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   sx={{
                     position: "relative",
                     zIndex: 2,
-                    boxShadow: `0 4px 12px ${alpha(primarySecondary, 0.12)}`,
-                    bgcolor: alpha(theme.palette.common.white, 0.02),
+                    width: 56,
+                    height: 56,
+                    borderRadius: 3,
+                    border: `1px solid ${alpha(primarySecondary, 0.2)}`,
+                    boxShadow: `0 8px 20px ${alpha(primarySecondary, 0.25)}`,
+                    bgcolor: alpha(theme.palette.common.white, 0.03),
+                    transition: "all 0.3s ease",
                     "&::after": {
                       content: '""',
                       position: "absolute",
-                      left: "-18%",
-                      top: "-18%",
-                      width: "136%",
-                      height: "136%",
-                      zIndex: 0,
-                      borderRadius: "50%",
-                      background: `radial-gradient(circle at center, ${alpha(primarySecondary, 0.55)} 0%, transparent 45%)`,
-                      filter: "blur(12px)",
-                      opacity: 0.32,
-                      pointerEvents: "none",
+                      inset: 0,
+                      zIndex: -1,
+                      borderRadius: 3,
+                      background: `radial-gradient(circle at center, ${alpha(primarySecondary, 0.4)} 0%, transparent 70%)`,
+                      filter: "blur(10px)",
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
                     },
-                    "&:hover::after": { opacity: 0.55 },
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                      boxShadow: `0 12px 28px ${alpha(primarySecondary, 0.4)}`,
+                      borderColor: alpha(primarySecondary, 0.5),
+                    },
+                    "&:hover::after": { opacity: 0.6 },
                   }}
+                  href="https://www.linkedin.com/in/dev-vitorhugo/"
+                  target="_blank"
                 >
-                  <LinkedInIcon />
+                  <LinkedInIcon sx={{ fontSize: 28 }} />
                 </IconButton>
 
                 <IconButton
@@ -379,26 +349,35 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   sx={{
                     position: "relative",
                     zIndex: 2,
-                    boxShadow: `0 4px 12px ${alpha(primaryMain, 0.12)}`,
-                    bgcolor: alpha(theme.palette.common.white, 0.02),
+                    width: 56,
+                    height: 56,
+                    borderRadius: 3,
+                    border: `1px solid ${alpha(primaryMain, 0.2)}`,
+                    boxShadow: `0 8px 20px ${alpha(primaryMain, 0.25)}`,
+                    bgcolor: alpha(theme.palette.common.white, 0.03),
+                    transition: "all 0.3s ease",
                     "&::after": {
                       content: '""',
                       position: "absolute",
-                      left: "-18%",
-                      top: "-18%",
-                      width: "136%",
-                      height: "136%",
-                      zIndex: 0,
-                      borderRadius: "50%",
-                      background: `radial-gradient(circle at center, ${alpha(primaryMain, 0.5)} 0%, transparent 45%)`,
-                      filter: "blur(12px)",
-                      opacity: 0.32,
-                      pointerEvents: "none",
+                      inset: 0,
+                      zIndex: -1,
+                      borderRadius: 3,
+                      background: `radial-gradient(circle at center, ${alpha(primaryMain, 0.4)} 0%, transparent 70%)`,
+                      filter: "blur(10px)",
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
                     },
-                    "&:hover::after": { opacity: 0.55 },
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                      boxShadow: `0 12px 28px ${alpha(primaryMain, 0.4)}`,
+                      borderColor: alpha(primaryMain, 0.5),
+                    },
+                    "&:hover::after": { opacity: 0.6 },
                   }}
+                  href="mailto:vitor95340@gmail.com"
+                  target="_blank"
                 >
-                  <MailOutlineIcon />
+                  <MailOutlineIcon sx={{ fontSize: 28 }} />
                 </IconButton>
               </Box>
             </motion.div>

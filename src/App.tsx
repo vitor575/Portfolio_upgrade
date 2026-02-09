@@ -4,6 +4,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { AnimatePresence } from "motion/react";
 import Splash from "./Components/Splash/Splash";
 import Welcome from "./Pages/Welcome/Welcome";
+import NavBar from "./Components/NavBar/NavBar";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -12,7 +13,7 @@ function App() {
 
   useEffect(() => {
     const introTimer = setTimeout(() => {
-      setPlayExit(true); 
+      setPlayExit(true);
     }, 3200);
 
     return () => clearTimeout(introTimer);
@@ -21,8 +22,8 @@ function App() {
   useEffect(() => {
     if (playExit) {
       const exitTimer = setTimeout(() => {
-        setShowSplash(false); 
-      }, 650); 
+        setShowSplash(false);
+      }, 650);
 
       return () => clearTimeout(exitTimer);
     }
@@ -33,8 +34,14 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AnimatePresence mode="wait">
-          {showSplash && <Splash key="splash" />}
-          {!showSplash && <Welcome />}
+          {showSplash ? (
+            <Splash key="splash" />
+          ) : (
+            <>
+              <NavBar />
+              <Welcome />
+            </>
+          )}
         </AnimatePresence>
       </ThemeProvider>
     </ColorModeContext.Provider>
