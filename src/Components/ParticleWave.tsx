@@ -99,7 +99,7 @@ const ParticleWave = () => {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         // Interaction settings
-        const interactionRadius = 250;
+        const interactionRadius = 150;
         const forceFactor = 2; // Strength of repulsion
 
         if (distance < interactionRadius) {
