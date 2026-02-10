@@ -20,7 +20,7 @@ interface NavBarProps {
   window?: () => Window;
 }
 
-const navItems = ["Home", "About", "Portfolio", "Contact"];
+const navItems = ["Home", "Sobre", "Projetos", "Contato"];
 
 const NavBar: React.FC<NavBarProps> = () => {
   const theme = useTheme();

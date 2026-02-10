@@ -5,6 +5,7 @@ import { AnimatePresence } from "motion/react";
 import Splash from "./Components/Splash/Splash";
 import Welcome from "./Pages/Welcome/Welcome";
 import NavBar from "./Components/NavBar/NavBar";
+import About from "./Pages/About/About";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -40,6 +41,7 @@ function App() {
             <>
               <NavBar />
               <Welcome />
+              <About />
             </>
           )}
         </AnimatePresence>
