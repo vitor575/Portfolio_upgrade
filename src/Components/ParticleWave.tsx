@@ -20,7 +20,6 @@ const ParticleWave = () => {
     let mouseX = -1000;
     let mouseY = -1000;
 
-    // Configuration
     const particleCount = 280;
     const colors = [
       primaryColor,
@@ -38,7 +37,7 @@ const ParticleWave = () => {
       vy: number;
       size: number;
       color: string;
-      baseSpeedY: number; // The natural upward speed
+      baseSpeedY: number; 
     }
 
     const particles: Particle[] = [];
@@ -50,7 +49,7 @@ const ParticleWave = () => {
         const y = Math.random() * height;
         const size = Math.random() * 2 + 1;
         const color = colors[Math.floor(Math.random() * colors.length)];
-        const baseSpeedY = Math.random() * 0.5 + 0.2; // Slow upward drift
+        const baseSpeedY = Math.random() * 0.5 + 0.2; 
 
         particles.push({
           x,

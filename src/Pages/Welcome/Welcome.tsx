@@ -1,4 +1,3 @@
-// Hero.tsx (glow mais sutil)
 import React from "react";
 import {
   Box,
@@ -40,64 +39,19 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        bgcolor: "background.default",
+        bgcolor: "transparent",
         color: "text.primary",
-        backgroundImage: `
-          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
-        `,
-        backgroundSize: "100px 100px",
-        backgroundPosition: "center center",
         position: "relative",
-        overflow: "hidden",
+        overflow: "visible",
       }}
     >
-      {[
-        { top: "5%", left: "5%", size: "450px", delay: 0, duration: 8 },
-        { bottom: "5%", right: "5%", size: "550px", delay: 1.5, duration: 9 },
-        { top: "30%", right: "15%", size: "400px", delay: 3, duration: 7 },
-      ].map((blob, i) => (
-        <Box
-          key={i}
-          component={motion.div}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.5, 0.8, 0.5], // Increased visibility
-            filter: ["blur(60px)", "blur(80px)", "blur(60px)"],
-          }}
-          transition={{
-            duration: blob.duration,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatDelay: i * 0.5,
-            delay: blob.delay,
-          }}
-          sx={{
-            position: "absolute",
-            top: blob.top,
-            bottom: blob.bottom,
-            left: blob.left,
-            right: blob.right,
-            width: blob.size,
-            height: blob.size,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, ${alpha(
-              primaryMain,
-              0.55,
-            )} 0%, transparent 70%)`,
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        />
-      ))}
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Grid container spacing={6} alignItems="center">
           <Grid size={{ xs: 12, md: 6 }}>
             <motion.div
-              initial={{ opacity: 0, x: -28 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
+              initial={{ opacity: 0, x: -28, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Box
                 sx={{
@@ -131,7 +85,6 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     color: "transparent",
-                    // sombra de texto suave, não neon
                     textShadow: `
                       0 2px 6px ${alpha("#000", 0.18)},
                       0 8px 20px ${alpha(primarySecondary, 0.12)}
@@ -166,7 +119,7 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                 </Typography>
               </Box>
 
-              <Typography variant="h6" sx={{ color: "text.secondary", mb: 3 }}>
+              <Typography variant="h5" sx={{ color: "text.secondary", mb: 3 }}>
                 Evoluindo a cada linha de código. Aprendendo a cada novo
                 desafio.
               </Typography>
@@ -179,17 +132,17 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                     sx={{
                       borderRadius: "50px",
                       background: alpha(primaryMain, 0.05),
-                      border: `1px solid ${alpha(primaryMain, 0.4)}`, // Borda mais visível
-                      color: alpha("#fff", 0.9), // Texto mais claro/visível
+                      border: `1px solid ${alpha(primaryMain, 0.4)}`,
+                      color: alpha("#fff", 0.9),
                       fontWeight: 600,
-                      fontSize: "0.85rem",
-                      height: "32px",
+                      fontSize: "1rem",
+                      height: "36px",
                       px: 1,
                       backdropFilter: "blur(6px)",
                       transition: "all 0.3s ease",
                       cursor: "default",
                       "&:hover": {
-                        background: alpha(primaryMain, 0.25), // Fundo mais claro no hover
+                        background: alpha(primaryMain, 0.25),
                         borderColor: alpha(primaryMain, 0.8),
                         boxShadow: `0 0 15px ${alpha(primaryMain, 0.3)}`,
                         transform: "translateY(-1px)",
@@ -200,7 +153,6 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
               </Box>
 
               <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
-                {/* botão principal com brilho de fundo sutil */}
                 <Button
                   variant="contained"
                   endIcon={<LaunchIcon />}
@@ -221,8 +173,8 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                       zIndex: 0,
                       borderRadius: 10,
                       background: `linear-gradient(90deg, ${alpha(primarySecondary, 0.6)}, ${alpha(primaryMain, 0.6)})`,
-                      filter: "blur(12px)", // blur bem menor
-                      opacity: 0.28, // opacity reduzida
+                      filter: "blur(12px)",
+                      opacity: 0.28,
                       pointerEvents: "none",
                     },
                     "&:hover::after": {
@@ -234,7 +186,6 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   Projects
                 </Button>
 
-                {/* botão secundário com brilho ainda mais discreto */}
                 <Button
                   variant="outlined"
                   startIcon={<MailOutlineIcon />}
@@ -271,13 +222,12 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
               </Box>
 
               <Box sx={{ display: "flex", gap: 2 }}>
-                {/* Ícones com brilho leve */}
                 <IconButton
                   aria-label="github"
                   sx={{
                     position: "relative",
                     zIndex: 2,
-                    width: 56, // Reduced from 64
+                    width: 56,
                     height: 56,
                     borderRadius: 3,
                     border: `1px solid ${alpha(primaryMain, 0.2)}`,
@@ -305,7 +255,7 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   href="https://github.com/vitor575"
                   target="_blank"
                 >
-                  <GitHubIcon sx={{ fontSize: 28 }} /> {/* Reduced from 32 */}
+                  <GitHubIcon sx={{ fontSize: 28 }} />
                 </IconButton>
 
                 <IconButton
@@ -385,9 +335,9 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
 
           <Grid size={{ xs: 12, md: 6 }}>
             <motion.div
-              initial={{ opacity: 0, x: 28 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9 }}
+              initial={{ opacity: 0, x: 28, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
             >
               <Box
                 sx={{

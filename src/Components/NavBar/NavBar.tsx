@@ -36,7 +36,6 @@ const NavBar: React.FC<NavBarProps> = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Simple active section logic based on scroll position - expand this later with actual sections
       const sections = navItems.map((item) =>
         document.getElementById(item.toLowerCase()),
       );
@@ -86,17 +85,17 @@ const NavBar: React.FC<NavBarProps> = () => {
         component="nav"
         sx={{
           background: scrolled
-            ? alpha(theme.palette.background.default, 0.7) // Glassmorphism when scrolled
+            ? alpha(theme.palette.background.default, 0.7) 
             : "transparent",
           backdropFilter: scrolled ? "blur(10px)" : "none",
           boxShadow: scrolled ? theme.shadows[4] : "none",
           transition: "all 0.3s ease-in-out",
-          backgroundImage: "none", // Remove default gradient on dark mode if present
+          backgroundImage: "none", 
           borderBottom: scrolled
             ? `1px solid ${alpha(theme.palette.divider, 0.1)}`
             : "none",
         }}
-        elevation={0} // Remove default shadow
+        elevation={0} 
       >
         <Container maxWidth="lg">
           <Toolbar sx={{ justifyContent: "space-between", px: "0 !important" }}>
@@ -113,7 +112,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                 cursor: "pointer",
               }}
             >
-              Vitor
+              Vitor Hugo
             </Typography>
 
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -128,7 +127,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                         : theme.palette.text.primary,
                     textTransform: "none",
                     fontWeight: activeSection === item ? 600 : 400,
-                    fontSize: "1rem",
+                    fontSize: "1.2rem",
                     mx: 1.5,
                     position: "relative",
                     "&::after": {
@@ -174,7 +173,7 @@ const NavBar: React.FC<NavBarProps> = () => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
