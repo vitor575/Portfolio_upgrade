@@ -5,6 +5,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import PersonIcon from "@mui/icons-material/Person";
 import ParticleWave from "../ParticleWave";
+import { useState } from "react";
 
 type HeroSplashAnimatedProps = {
   playIntro?: boolean;
@@ -16,11 +17,16 @@ export default function HeroSplashAnimated({
   playExit = false,
 }: HeroSplashAnimatedProps) {
   const theme = useTheme();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const primaryMain = theme.palette.primary.main;
   const primaryDark = theme.palette.primary.dark;
   const textPrimary = theme.palette.text.primary;
   const textSecondary = theme.palette.text.secondary;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
 
   return (
     <Box
@@ -35,6 +41,7 @@ export default function HeroSplashAnimated({
       }
       exit={{ opacity: 0, y: -32 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
+      onMouseMove={handleMouseMove}
       sx={{
         position: "relative",
         width: "100%",
@@ -46,6 +53,23 @@ export default function HeroSplashAnimated({
         overflow: "hidden",
       }}
     >
+      {/* Mouse-following Spotlight */}
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: 2,
+          background: `radial-gradient(circle 600px at ${mousePos.x}px ${mousePos.y}px, ${alpha(
+            primaryMain,
+            0.15,
+          )}, transparent 70%)`,
+          transition: "background 0.1s ease-out",
+        }}
+      />
       <ParticleWave />
       {[
         { top: "10%", left: "10%", size: "200px", delay: 0, duration: 5 },

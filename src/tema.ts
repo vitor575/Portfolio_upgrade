@@ -1,4 +1,3 @@
-// tema.ts
 import { createContext, useState, useMemo } from "react";
 import { createTheme, type Theme } from "@mui/material/styles";
 
@@ -121,7 +120,21 @@ export const themeSettings = (mode: Mode) => {
     },
     typography: {
       fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-      fontSize: 12,
+      fontSize: 14,
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            scrollBehavior: "smooth",
+            scrollPaddingTop: "80px",
+            overflowX: "hidden",
+          },
+          body: {
+            overflowX: "hidden",
+          },
+        },
+      },
     },
   };
 };
@@ -138,7 +151,7 @@ export const useMode = (): [Theme, { toggleColorMode: () => void }] => {
       toggleColorMode: () =>
         setMode((prev) => (prev === "light" ? "dark" : "light")),
     }),
-    []
+    [],
   );
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
