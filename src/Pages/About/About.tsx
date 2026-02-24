@@ -128,13 +128,7 @@ const About: React.FC = () => {
                   mb: 4,
                 }}
               >
-                Vitor Hugo, estudante de Programação no IFSP e Desenvolvedor
-                Front-End e Back-End. Atualmente, foco meu aprendizado na Escola
-                DNC, onde venho aprimorando minhas habilidades na construção de
-                soluções digitais que unem design impactante e funcionalidade.
-                Acredito que a tecnologia é a ferramenta essencial para resolver
-                problemas e criar experiências que atendam às necessidades dos
-                usuários e dos negócios.
+                Sou um desenvolvedor em constante evolução, sempre buscando aprender e me aprofundar nas tecnologias do mercado. Atualmente curso Análise e Desenvolvimento de Sistemas pela Universidade Cruzeiro do Sul e atuo como desenvolvedor freelancer, criando soluções práticas e funcionais.
               </Typography>
 
               <Box

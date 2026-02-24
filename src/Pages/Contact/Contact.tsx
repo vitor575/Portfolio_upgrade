@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   Box,
   Container,
@@ -8,6 +8,9 @@ import {
   Button,
   IconButton,
   InputAdornment,
+  Snackbar,
+  Alert,
+  CircularProgress,
 } from "@mui/material";
 import { useTheme, alpha } from "@mui/material/styles";
 import { motion } from "framer-motion";
@@ -17,14 +20,80 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import SendIcon from "@mui/icons-material/Send";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import ShareIcon from "@mui/icons-material/Share";
+import emailjs from "@emailjs/browser";
 
 const Contact: React.FC = () => {
   const theme = useTheme();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [isSending, setIsSending] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error",
+  });
+
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
 
   const primaryMain = theme.palette.primary.main;
   const primaryDark = theme.palette.primary.dark ?? primaryMain;
   const secondaryMain = theme.palette.secondary.main;
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.user_name || !formData.user_email || !formData.message) {
+      setSnackbar({
+        open: true,
+        message: "Por favor, preencha todos os campos.",
+        severity: "error",
+      });
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      // SUBSTITUA PELAS SUAS CHAVES DO EMAILJS
+      // Você pode criar uma conta gratuita em https://www.emailjs.com/
+      const result = await emailjs.sendForm(
+        "service_py4x7ft", // Ex: service_abc123
+        "template_t3p0z2g", // Ex: template_xyz456
+        formRef.current!,
+        "p6BSW-__qibCkibyo", // Ex: user_abc123...
+      );
+
+      console.log("Email enviado com sucesso:", result.text);
+      setSnackbar({
+        open: true,
+        message: "Mensagem enviada com sucesso! Responderei em breve.",
+        severity: "success",
+      });
+      setFormData({ user_name: "", user_email: "", message: "" });
+    } catch (error) {
+      console.error("Erro ao enviar email:", error);
+      setSnackbar({
+        open: true,
+        message: "Ocorreu um erro ao enviar. Tente novamente mais tarde.",
+        severity: "error",
+      });
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <Box
@@ -75,6 +144,7 @@ const Contact: React.FC = () => {
               color: "text.secondary",
               maxWidth: "600px",
               mx: "auto",
+              pb: 2,
               position: "relative",
               "&::after": {
                 content: '""',
@@ -82,15 +152,14 @@ const Contact: React.FC = () => {
                 bottom: -10,
                 left: "50%",
                 transform: "translateX(-50%)",
-                width: "40px",
+                width: "20rem",
                 height: "3px",
                 borderRadius: "2px",
                 background: `linear-gradient(90deg, ${primaryMain}, ${secondaryMain})`,
               },
             }}
           >
-            Tem alguma dúvida? Envie-me uma mensagem e responderei o mais rápido
-            possível.
+            Quer entrar em contato comigo ?, use uma das opções abaixo.
           </Typography>
         </Box>
 
@@ -144,10 +213,15 @@ const Contact: React.FC = () => {
 
               <Box
                 component="form"
+                ref={formRef}
+                onSubmit={handleSend}
                 sx={{ display: "flex", flexDirection: "column", gap: 3 }}
               >
                 <TextField
                   fullWidth
+                  name="user_name"
+                  value={formData.user_name}
+                  onChange={handleInputChange}
                   placeholder="Seu Nome"
                   variant="outlined"
                   InputProps={{
@@ -168,6 +242,7 @@ const Contact: React.FC = () => {
                       transition: "all 0.3s ease",
                       "&:hover": {
                         bgcolor: alpha(theme.palette.common.white, 0.05),
+                        boxShadow: `0 0 15px ${alpha(primaryMain, 0.3)}`,
                       },
                       "& fieldset": {
                         borderColor: alpha(theme.palette.common.white, 0.1),
@@ -180,6 +255,9 @@ const Contact: React.FC = () => {
                 />
                 <TextField
                   fullWidth
+                  name="user_email"
+                  value={formData.user_email}
+                  onChange={handleInputChange}
                   placeholder="Seu Email"
                   variant="outlined"
                   InputProps={{
@@ -198,6 +276,10 @@ const Contact: React.FC = () => {
                       borderRadius: 3,
                       bgcolor: alpha(theme.palette.common.white, 0.03),
                       transition: "all 0.3s ease",
+                      "&:hover": {
+                        bgcolor: alpha(theme.palette.common.white, 0.05),
+                        boxShadow: `0 0 15px ${alpha(primaryMain, 0.3)}`,
+                      },
                       "& fieldset": {
                         borderColor: alpha(theme.palette.common.white, 0.1),
                       },
@@ -209,6 +291,9 @@ const Contact: React.FC = () => {
                 />
                 <TextField
                   fullWidth
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   multiline
                   rows={4}
                   placeholder="Sua Mensagem"
@@ -232,6 +317,10 @@ const Contact: React.FC = () => {
                       borderRadius: 3,
                       bgcolor: alpha(theme.palette.common.white, 0.03),
                       transition: "all 0.3s ease",
+                      "&:hover": {
+                        bgcolor: alpha(theme.palette.common.white, 0.05),
+                        boxShadow: `0 0 15px ${alpha(primaryMain, 0.3)}`,
+                      },
                       "& fieldset": {
                         borderColor: alpha(theme.palette.common.white, 0.1),
                       },
@@ -247,7 +336,15 @@ const Contact: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   variant="contained"
-                  endIcon={<SendIcon />}
+                  type="submit"
+                  disabled={isSending}
+                  endIcon={
+                    isSending ? (
+                      <CircularProgress size={20} color="inherit" />
+                    ) : (
+                      <SendIcon />
+                    )
+                  }
                   sx={{
                     mt: 2,
                     py: 1.5,
@@ -263,9 +360,28 @@ const Contact: React.FC = () => {
                     },
                   }}
                 >
-                  Enviar Mensagem
+                  {isSending ? "Enviando..." : "Enviar Mensagem"}
                 </Button>
               </Box>
+
+              <Snackbar
+                open={snackbar.open}
+                autoHideDuration={6000}
+                onClose={() =>
+                  setSnackbar((prev) => ({ ...prev, open: false }))
+                }
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+              >
+                <Alert
+                  onClose={() =>
+                    setSnackbar((prev) => ({ ...prev, open: false }))
+                  }
+                  severity={snackbar.severity}
+                  sx={{ width: "100%", borderRadius: 2 }}
+                >
+                  {snackbar.message}
+                </Alert>
+              </Snackbar>
 
               <Box
                 sx={{
@@ -291,6 +407,50 @@ const Contact: React.FC = () => {
                 </Box>
 
                 <Grid container spacing={2}>
+                  <Grid size={{ xs: 12 }}>
+                    <Box
+                      component="a"
+                      href="https://wa.me/5511977562907"
+                      target="_blank"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        p: 2,
+                        borderRadius: 3,
+                        textDecoration: "none",
+                        bgcolor: alpha(theme.palette.common.white, 0.03),
+                        border: `1px solid ${alpha(theme.palette.common.white, 0.05)}`,
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          borderColor: "#25D366",
+                          bgcolor: alpha("#25D366", 0.05),
+                          transform: "translateX(10px)",
+                          boxShadow: `0 0 20px ${alpha("#25D366", 0.3)}`,
+                        },
+                      }}
+                    >
+                      <IconButton
+                        sx={{
+                          color: "#25D366",
+                          bgcolor: alpha("#25D366", 0.1),
+                          mr: 2,
+                        }}
+                      >
+                        <WhatsAppIcon />
+                      </IconButton>
+                      <Box>
+                        <Typography
+                          sx={{
+                            color: "text.primary",
+                            fontWeight: 700,
+                            fontSize: "1.2rem",
+                          }}
+                        >
+                          WhatsApp
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Grid>
                   <Grid size={{ xs: 12 }}>
                     <Box
                       component="a"
@@ -330,12 +490,6 @@ const Contact: React.FC = () => {
                           }}
                         >
                           Vamos nos Conectar
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          sx={{ color: "text.secondary" }}
-                        >
-                          no LinkedIn
                         </Typography>
                       </Box>
                     </Box>
@@ -380,12 +534,6 @@ const Contact: React.FC = () => {
                           }}
                         >
                           Github
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          sx={{ color: "text.secondary" }}
-                        >
-                          @vitor575
                         </Typography>
                       </Box>
                     </Box>
