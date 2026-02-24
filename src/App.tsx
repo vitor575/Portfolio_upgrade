@@ -13,6 +13,7 @@ import Splash from "./Components/Splash/Splash";
 import Welcome from "./Pages/Welcome/Welcome";
 import NavBar from "./Components/NavBar/NavBar";
 import About from "./Pages/About/About";
+import Experience from "./Pages/Experience/Experience";
 import Contact from "./Pages/Contact/Contact";
 import ProjectsStack from "./Pages/ProjectsStack/ProjectsStack";
 
@@ -65,6 +66,7 @@ function App() {
               <NavBar />
               <Welcome />
               <About />
+              <Experience />
               <ProjectsStack />
               <Contact />
             </Box>

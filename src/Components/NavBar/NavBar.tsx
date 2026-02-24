@@ -20,7 +20,7 @@ interface NavBarProps {
   window?: () => Window;
 }
 
-const navItems = ["Home", "Sobre", "Projetos", "Contato"];
+const navItems = ["Home", "Sobre", "Experiência", "Projetos", "Contato"];
 
 const NavBar: React.FC<NavBarProps> = () => {
   const theme = useTheme();
@@ -85,17 +85,17 @@ const NavBar: React.FC<NavBarProps> = () => {
         component="nav"
         sx={{
           background: scrolled
-            ? alpha(theme.palette.background.default, 0.7) 
+            ? alpha(theme.palette.background.default, 0.7)
             : "transparent",
           backdropFilter: scrolled ? "blur(10px)" : "none",
           boxShadow: scrolled ? theme.shadows[4] : "none",
           transition: "all 0.3s ease-in-out",
-          backgroundImage: "none", 
+          backgroundImage: "none",
           borderBottom: scrolled
             ? `1px solid ${alpha(theme.palette.divider, 0.1)}`
             : "none",
         }}
-        elevation={0} 
+        elevation={0}
       >
         <Container maxWidth="lg">
           <Toolbar sx={{ justifyContent: "space-between", px: "0 !important" }}>

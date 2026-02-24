@@ -3,7 +3,6 @@ import {
   Box,
   Container,
   Typography,
-  Button,
   Chip,
   IconButton,
   Grid,
@@ -12,8 +11,7 @@ import {
 import { useTheme, alpha } from "@mui/material/styles";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import LaunchIcon from "@mui/icons-material/Launch";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { motion } from "framer-motion";
 
 interface HeroProps {
@@ -152,75 +150,6 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                 ))}
               </Box>
 
-              <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
-                <Button
-                  variant="contained"
-                  endIcon={<LaunchIcon />}
-                  sx={{
-                    position: "relative",
-                    zIndex: 2,
-                    textTransform: "none",
-                    borderRadius: 2,
-                    px: 4,
-                    boxShadow: `0 6px 18px ${alpha(primaryMain, 0.18)}`,
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      left: "-6%",
-                      top: "-8%",
-                      width: "112%",
-                      height: "116%",
-                      zIndex: 0,
-                      borderRadius: 10,
-                      background: `linear-gradient(90deg, ${alpha(primarySecondary, 0.6)}, ${alpha(primaryMain, 0.6)})`,
-                      filter: "blur(12px)",
-                      opacity: 0.28,
-                      pointerEvents: "none",
-                    },
-                    "&:hover::after": {
-                      opacity: 0.36,
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  Projects
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  startIcon={<MailOutlineIcon />}
-                  sx={{
-                    position: "relative",
-                    zIndex: 2,
-                    textTransform: "none",
-                    borderRadius: 2,
-                    px: 3,
-                    borderColor: alpha(theme.palette.primary.main, 0.18),
-                    color: theme.palette.text.primary,
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      left: "-6%",
-                      top: "-8%",
-                      width: "112%",
-                      height: "116%",
-                      zIndex: 0,
-                      borderRadius: 10,
-                      background: `linear-gradient(90deg, ${alpha(primaryMain, 0.45)}, ${alpha(primarySecondary, 0.4)})`,
-                      filter: "blur(10px)",
-                      opacity: 0.18,
-                      pointerEvents: "none",
-                    },
-                    "&:hover::after": {
-                      opacity: 0.28,
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  Contact
-                </Button>
-              </Box>
-
               <Box sx={{ display: "flex", gap: 2 }}>
                 <IconButton
                   aria-label="github"
@@ -265,10 +194,11 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                     zIndex: 2,
                     width: 56,
                     height: 56,
+                    color: "#1190caff",
                     borderRadius: 3,
-                    border: `1px solid ${alpha(primarySecondary, 0.2)}`,
-                    boxShadow: `0 8px 20px ${alpha(primarySecondary, 0.25)}`,
-                    bgcolor: alpha(theme.palette.common.white, 0.03),
+                    border: `1px solid ${alpha("#0e76a8", 0.2)}`,
+                    boxShadow: `0 8px 20px ${alpha("#0e76a8", 0.25)}`,
+                    bgcolor: alpha("#0e76a8", 0.03),
                     transition: "all 0.3s ease",
                     "&::after": {
                       content: '""',
@@ -276,15 +206,15 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                       inset: 0,
                       zIndex: -1,
                       borderRadius: 3,
-                      background: `radial-gradient(circle at center, ${alpha(primarySecondary, 0.4)} 0%, transparent 70%)`,
+                      background: `radial-gradient(circle at center, ${alpha("#0e76a8", 0.4)} 0%, transparent 70%)`,
                       filter: "blur(10px)",
                       opacity: 0,
                       transition: "opacity 0.3s ease",
                     },
                     "&:hover": {
                       transform: "translateY(-4px)",
-                      boxShadow: `0 12px 28px ${alpha(primarySecondary, 0.4)}`,
-                      borderColor: alpha(primarySecondary, 0.5),
+                      boxShadow: `0 12px 28px ${alpha("#0e76a8", 0.4)}`,
+                      borderColor: alpha("#0e76a8", 0.5),
                     },
                     "&:hover::after": { opacity: 0.6 },
                   }}
@@ -295,15 +225,15 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                 </IconButton>
 
                 <IconButton
-                  aria-label="email"
+                  aria-label="whatsapp"
                   sx={{
                     position: "relative",
                     zIndex: 2,
                     width: 56,
                     height: 56,
                     borderRadius: 3,
-                    border: `1px solid ${alpha(primaryMain, 0.2)}`,
-                    boxShadow: `0 8px 20px ${alpha(primaryMain, 0.25)}`,
+                    border: `1px solid ${alpha("#25D366", 0.2)}`,
+                    boxShadow: `0 8px 20px ${alpha("#25D366", 0.25)}`,
                     bgcolor: alpha(theme.palette.common.white, 0.03),
                     transition: "all 0.3s ease",
                     "&::after": {
@@ -312,22 +242,22 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                       inset: 0,
                       zIndex: -1,
                       borderRadius: 3,
-                      background: `radial-gradient(circle at center, ${alpha(primaryMain, 0.4)} 0%, transparent 70%)`,
+                      background: `radial-gradient(circle at center, ${alpha("#25D366", 0.4)} 0%, transparent 70%)`,
                       filter: "blur(10px)",
                       opacity: 0,
                       transition: "opacity 0.3s ease",
                     },
                     "&:hover": {
                       transform: "translateY(-4px)",
-                      boxShadow: `0 12px 28px ${alpha(primaryMain, 0.4)}`,
-                      borderColor: alpha(primaryMain, 0.5),
+                      boxShadow: `0 12px 28px ${alpha("#25D366", 0.4)}`,
+                      borderColor: alpha("#25D366", 0.5),
                     },
                     "&:hover::after": { opacity: 0.6 },
                   }}
-                  href="mailto:vitor95340@gmail.com"
+                  href="https://wa.me/5511977562907"
                   target="_blank"
                 >
-                  <MailOutlineIcon sx={{ fontSize: 28 }} />
+                  <WhatsAppIcon sx={{ fontSize: 28, color: "#25D366" }} />
                 </IconButton>
               </Box>
             </motion.div>
