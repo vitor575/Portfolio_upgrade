@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import { useTheme, alpha } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link, useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 interface NavBarProps {
   window?: () => Window;
@@ -24,9 +26,12 @@ const navItems = ["Home", "Sobre", "Experiência", "Projetos", "Contato"];
 
 const NavBar: React.FC<NavBarProps> = () => {
   const theme = useTheme();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
+
+  const isProjectPage = location.pathname.startsWith("/project/");
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -36,31 +41,46 @@ const NavBar: React.FC<NavBarProps> = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      const sections = navItems.map((item) =>
-        document.getElementById(item.toLowerCase()),
-      );
-      const scrollPosition = window.scrollY + 100;
+      if (!isProjectPage) {
+        const sections = navItems.map((item) =>
+          document.getElementById(item.toLowerCase()),
+        );
+        const scrollPosition = window.scrollY + 100;
 
-      for (const section of sections) {
-        if (
-          section &&
-          section.offsetTop <= scrollPosition &&
-          section.offsetTop + section.offsetHeight > scrollPosition
-        ) {
-          setActiveSection(
-            section.id.charAt(0).toUpperCase() + section.id.slice(1),
-          );
+        for (const section of sections) {
+          if (
+            section &&
+            section.offsetTop <= scrollPosition &&
+            section.offsetTop + section.offsetHeight > scrollPosition
+          ) {
+            setActiveSection(
+              section.id.charAt(0).toUpperCase() + section.id.slice(1),
+            );
+          }
         }
+      } else {
+        setActiveSection("");
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isProjectPage]);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography
+        variant="h6"
+        component={Link}
+        to="/"
+        sx={{
+          my: 2,
+          display: "block",
+          textDecoration: "none",
+          color: "inherit",
+          fontWeight: 700,
+        }}
+      >
         Vitor
       </Typography>
       <List>
@@ -68,8 +88,9 @@ const NavBar: React.FC<NavBarProps> = () => {
           <ListItem key={item} disablePadding>
             <ListItemButton
               sx={{ textAlign: "center" }}
-              component="a"
-              href={`#${item.toLowerCase()}`}
+              component={HashLink}
+              smooth
+              to={`/#${item.toLowerCase()}`}
             >
               <ListItemText primary={item} />
             </ListItemButton>
@@ -84,16 +105,18 @@ const NavBar: React.FC<NavBarProps> = () => {
       <AppBar
         component="nav"
         sx={{
-          background: scrolled
-            ? alpha(theme.palette.background.default, 0.7)
-            : "transparent",
-          backdropFilter: scrolled ? "blur(10px)" : "none",
-          boxShadow: scrolled ? theme.shadows[4] : "none",
+          background:
+            scrolled || isProjectPage
+              ? alpha(theme.palette.background.default, 0.7)
+              : "transparent",
+          backdropFilter: scrolled || isProjectPage ? "blur(10px)" : "none",
+          boxShadow: scrolled || isProjectPage ? theme.shadows[4] : "none",
           transition: "all 0.3s ease-in-out",
           backgroundImage: "none",
-          borderBottom: scrolled
-            ? `1px solid ${alpha(theme.palette.divider, 0.1)}`
-            : "none",
+          borderBottom:
+            scrolled || isProjectPage
+              ? `1px solid ${alpha(theme.palette.divider, 0.1)}`
+              : "none",
         }}
         elevation={0}
       >
@@ -101,7 +124,8 @@ const NavBar: React.FC<NavBarProps> = () => {
           <Toolbar sx={{ justifyContent: "space-between", px: "0 !important" }}>
             <Typography
               variant="h6"
-              component="div"
+              component={Link}
+              to="/"
               sx={{
                 flexGrow: 0,
                 fontWeight: 700,
@@ -110,6 +134,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 cursor: "pointer",
+                textDecoration: "none",
               }}
             >
               Vitor Hugo
@@ -119,7 +144,9 @@ const NavBar: React.FC<NavBarProps> = () => {
               {navItems.map((item) => (
                 <Button
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  component={HashLink}
+                  smooth
+                  to={`/#${item.toLowerCase()}`}
                   sx={{
                     color:
                       activeSection === item

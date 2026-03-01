@@ -13,7 +13,10 @@ import CodeIcon from "@mui/icons-material/Code";
 import StorageIcon from "@mui/icons-material/Storage";
 import LaunchIcon from "@mui/icons-material/Launch";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import CoffeeIcon from "@mui/icons-material/Coffee";
+import { Coffee as CoffeeIcon } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+
+import { projects } from "../../data/projects";
 
 const ProjectsStack: React.FC = () => {
   const theme = useTheme();
@@ -58,27 +61,6 @@ const ProjectsStack: React.FC = () => {
       icon: "Spring",
       color: "#6DB33F",
       shadow: "rgba(109, 179, 63, 0.2)",
-    },
-  ];
-
-  const projects = [
-    {
-      title: "Portfolio Premium",
-      description:
-        "Website pessoal desenvolvido com React, TypeScript e Material UI, focado em alta performance e design premium.",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=500",
-      live: "#",
-      details: "#",
-    },
-    {
-      title: "Sistema de Gestão",
-      description:
-        "Aplicação full-stack para gerenciamento de processos empresariais, utilizando Spring Boot no back-end.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&q=80&w=500",
-      live: "#",
-      details: "#",
     },
   ];
 
@@ -262,6 +244,8 @@ const ProjectsStack: React.FC = () => {
                           Live Demo
                         </Button>
                         <Button
+                          component={Link}
+                          to={`/project/${project.slug}`}
                           variant="outlined"
                           endIcon={<ArrowForwardIcon />}
                           sx={{

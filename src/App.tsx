@@ -9,13 +9,41 @@ import {
   useTransform,
   MotionValue,
 } from "framer-motion";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Splash from "./Components/Splash/Splash";
-import Welcome from "./Pages/Welcome/Welcome";
 import NavBar from "./Components/NavBar/NavBar";
-import About from "./Pages/About/About";
-import Experience from "./Pages/Experience/Experience";
-import Contact from "./Pages/Contact/Contact";
-import ProjectsStack from "./Pages/ProjectsStack/ProjectsStack";
+import Home from "./Pages/Home/Home";
+import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails";
+
+function AppContent() {
+  const location = useLocation();
+
+  return (
+    <Box
+      sx={{
+        bgcolor: "background.default",
+        minHeight: "100vh",
+        position: "relative",
+        backgroundImage: `
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
+        `,
+        backgroundSize: "100px 100px",
+        backgroundPosition: "center center",
+        overflow: "hidden",
+      }}
+    >
+      <GlobalBackground />
+      <NavBar />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/project/:slug" element={<ProjectDetails />} />
+        </Routes>
+      </AnimatePresence>
+    </Box>
+  );
+}
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -44,34 +72,11 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AnimatePresence mode="wait">
-          {showSplash ? (
-            <Splash key="splash" />
-          ) : (
-            <Box
-              sx={{
-                bgcolor: "background.default",
-                minHeight: "100vh",
-                position: "relative",
-                backgroundImage: `
-                  linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
-                `,
-                backgroundSize: "100px 100px",
-                backgroundPosition: "center center",
-                overflow: "hidden",
-              }}
-            >
-              <GlobalBackground />
-              <NavBar />
-              <Welcome />
-              <About />
-              <Experience />
-              <ProjectsStack />
-              <Contact />
-            </Box>
-          )}
-        </AnimatePresence>
+        <BrowserRouter>
+          <AnimatePresence mode="wait">
+            {showSplash ? <Splash key="splash" /> : <AppContent />}
+          </AnimatePresence>
+        </BrowserRouter>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
