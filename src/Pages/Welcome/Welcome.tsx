@@ -6,7 +6,6 @@ import {
   Chip,
   IconButton,
   Grid,
-  useMediaQuery,
 } from "@mui/material";
 import { useTheme, alpha } from "@mui/material/styles";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -20,7 +19,6 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
   const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
   const primaryMain = theme.palette.primary.main;
   const primarySecondary = theme.palette.secondary.main;
@@ -44,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        <Grid container spacing={6} alignItems="center">
+        <Grid container spacing={4} alignItems="center">
           <Grid size={{ xs: 12, md: 6 }}>
             <motion.div
               initial={{ opacity: 0, x: -28, scale: 0.8 }}
@@ -74,9 +72,9 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                 <Typography
                   component="h1"
                   sx={{
-                    fontSize: { xs: "3rem", md: "5.4rem" },
-                    fontWeight: 700,
-                    lineHeight: 1,
+                    fontSize: { xs: "2.8rem", sm: "4rem", md: "5.4rem" },
+                    fontWeight: 800,
+                    lineHeight: 1.1,
                     mb: 1,
                     background: `linear-gradient(90deg, ${primarySecondary} 0%, ${primaryMain} 100%)`,
                     WebkitBackgroundClip: "text",
@@ -89,6 +87,7 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                     `,
                     position: "relative",
                     zIndex: 2,
+                    textAlign: { xs: "center", md: "left" },
                   }}
                 >
                   Full-stack
@@ -97,9 +96,9 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                 <Typography
                   component="div"
                   sx={{
-                    fontSize: { xs: "3rem", md: "5.4rem" },
-                    fontWeight: 700,
-                    lineHeight: 1,
+                    fontSize: { xs: "2.8rem", sm: "4rem", md: "5.4rem" },
+                    fontWeight: 800,
+                    lineHeight: 1.1,
                     background: `linear-gradient(90deg, ${primaryMain}, ${primaryDark})`,
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
@@ -111,18 +110,35 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                     `,
                     position: "relative",
                     zIndex: 2,
+                    textAlign: { xs: "center", md: "left" },
                   }}
                 >
                   Developer
                 </Typography>
               </Box>
 
-              <Typography variant="h5" sx={{ color: "text.secondary", mb: 3 }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: "text.secondary",
+                  mb: 3,
+                  fontSize: { xs: "1.1rem", md: "1.5rem" },
+                  textAlign: { xs: "center", md: "left" },
+                }}
+              >
                 Evoluindo a cada linha de código. Aprendendo a cada novo
                 desafio.
               </Typography>
 
-              <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mb: 4 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 1,
+                  flexWrap: "wrap",
+                  mb: 4,
+                  justifyContent: { xs: "center", md: "flex-start" },
+                }}
+              >
                 {["REACT", "JAVASCRIPT", "JAVA", "SPRING BOOT"].map((s) => (
                   <Chip
                     key={s}
@@ -133,8 +149,8 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                       border: `1px solid ${alpha(primaryMain, 0.4)}`,
                       color: alpha("#fff", 0.9),
                       fontWeight: 600,
-                      fontSize: "1rem",
-                      height: "36px",
+                      fontSize: { xs: "0.85rem", md: "1rem" },
+                      height: { xs: "32px", md: "36px" },
                       px: 1,
                       backdropFilter: "blur(6px)",
                       transition: "all 0.3s ease",
@@ -150,14 +166,20 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                 ))}
               </Box>
 
-              <Box sx={{ display: "flex", gap: 2 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  justifyContent: { xs: "center", md: "flex-start" },
+                }}
+              >
                 <IconButton
                   aria-label="github"
                   sx={{
                     position: "relative",
                     zIndex: 2,
-                    width: 56,
-                    height: 56,
+                    width: { xs: 48, md: 56 },
+                    height: { xs: 48, md: 56 },
                     borderRadius: 3,
                     border: `1px solid ${alpha(primaryMain, 0.2)}`,
                     boxShadow: `0 8px 20px ${alpha(primaryMain, 0.25)}`,
@@ -184,7 +206,7 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   href="https://github.com/vitor575"
                   target="_blank"
                 >
-                  <GitHubIcon sx={{ fontSize: 28 }} />
+                  <GitHubIcon sx={{ fontSize: { xs: 24, md: 28 } }} />
                 </IconButton>
 
                 <IconButton
@@ -192,8 +214,8 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   sx={{
                     position: "relative",
                     zIndex: 2,
-                    width: 56,
-                    height: 56,
+                    width: { xs: 48, md: 56 },
+                    height: { xs: 48, md: 56 },
                     color: "#1190caff",
                     borderRadius: 3,
                     border: `1px solid ${alpha("#0e76a8", 0.2)}`,
@@ -221,7 +243,7 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   href="https://www.linkedin.com/in/dev-vitorhugo/"
                   target="_blank"
                 >
-                  <LinkedInIcon sx={{ fontSize: 28 }} />
+                  <LinkedInIcon sx={{ fontSize: { xs: 24, md: 28 } }} />
                 </IconButton>
 
                 <IconButton
@@ -229,8 +251,8 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   sx={{
                     position: "relative",
                     zIndex: 2,
-                    width: 56,
-                    height: 56,
+                    width: { xs: 48, md: 56 },
+                    height: { xs: 48, md: 56 },
                     borderRadius: 3,
                     border: `1px solid ${alpha("#25D366", 0.2)}`,
                     boxShadow: `0 8px 20px ${alpha("#25D366", 0.25)}`,
@@ -257,7 +279,9 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   href="https://wa.me/5511977562907"
                   target="_blank"
                 >
-                  <WhatsAppIcon sx={{ fontSize: 28, color: "#25D366" }} />
+                  <WhatsAppIcon
+                    sx={{ fontSize: { xs: 24, md: 28 }, color: "#25D366" }}
+                  />
                 </IconButton>
               </Box>
             </motion.div>
@@ -272,11 +296,11 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: isMdUp ? "flex-end" : "center",
+                  justifyContent: "center",
                   alignItems: "center",
                   width: "100%",
-                  minHeight: 360,
-                  p: 3,
+                  minHeight: { xs: 280, md: 360 },
+                  p: { xs: 2, md: 3 },
                   borderRadius: 3,
                   background: `linear-gradient(135deg, ${alpha(
                     primaryMain,
@@ -289,7 +313,11 @@ const Hero: React.FC<HeroProps> = ({ illustrationSrc = "/Gif/gif_eu.gif" }) => {
                   component="img"
                   src={illustrationSrc}
                   alt="illustration"
-                  sx={{ maxWidth: "100%", height: "auto" }}
+                  sx={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    maxHeight: { xs: "240px", md: "400px" },
+                  }}
                 />
               </Box>
             </motion.div>

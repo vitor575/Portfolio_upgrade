@@ -119,7 +119,7 @@ const TimelineCard: React.FC<{ item: ExperienceItem; index: number }> = ({
             boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             mb: 2,
             fontWeight: 700,
-            fontSize: "0.9rem",
+            fontSize: { xs: "0.8rem", md: "0.9rem" },
           }}
         >
           {item.year} - {item.status} {item.company && `| ${item.company}`}
@@ -143,9 +143,9 @@ const TimelineCard: React.FC<{ item: ExperienceItem; index: number }> = ({
           sx={{
             color: "text.primary",
             lineHeight: 1.6,
-            fontSize: { xs: "1rem", md: "1.1rem" },
+            fontSize: { xs: "0.95rem", md: "1.1rem" },
             maxWidth: "800px",
-            textAlign: "justify",
+            textAlign: { xs: "left", sm: "justify" },
           }}
         >
           {item.description}
@@ -175,7 +175,8 @@ const Experience: React.FC = () => {
           variant="h2"
           sx={{
             fontWeight: 800,
-            mb: 10,
+            mb: { xs: 6, md: 10 },
+            fontSize: { xs: "2.5rem", md: "3.75rem" },
             background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -193,7 +194,7 @@ const Experience: React.FC = () => {
               left: { xs: 24, md: 29 },
               top: 30,
               bottom: 0,
-              width: "4px",
+              width: "2px",
               background: `linear-gradient(to bottom, ${alpha(theme.palette.primary.main, 1)} 0%, ${alpha(theme.palette.secondary.main, 1)} 100%)`,
               zIndex: 1,
             }}

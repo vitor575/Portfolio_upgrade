@@ -45,10 +45,11 @@ const About: React.FC = () => {
                   width: { xs: "280px", md: "380px" },
                   height: { xs: "280px", md: "380px" },
                   mx: "auto",
+                  mb: { xs: 4, md: 0 },
                   "&::before": {
                     content: '""',
                     position: "absolute",
-                    inset: -20,
+                    inset: { xs: -10, md: -20 },
                     borderRadius: "50%",
                     background: `radial-gradient(circle, ${alpha(primaryMain, 0.4)}, transparent 70%)`,
                     zIndex: -1,
@@ -88,11 +89,12 @@ const About: React.FC = () => {
                 transition={{ duration: 0.6 }}
                 sx={{
                   fontWeight: 800,
-                  fontSize: { xs: "2.5rem", md: "3.5rem" },
+                  fontSize: { xs: "2.2rem", md: "3.5rem" },
                   mb: 3,
                   background: `linear-gradient(135deg, ${primaryMain}, ${secondaryMain})`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
                 Sobre Mim
@@ -105,11 +107,12 @@ const About: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 sx={{
-                  fontSize: { xs: "1.1rem", md: "1.3rem" },
+                  fontSize: { xs: "1rem", md: "1.3rem" },
                   lineHeight: 1.8,
                   color: "text.primary",
                   mb: 2,
                   fontWeight: 500,
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
                 Olá, eu sou <strong>Vitor Hugo</strong>.
@@ -122,13 +125,18 @@ const About: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
                 sx={{
-                  fontSize: { xs: "1.1rem", md: "1.25rem" },
+                  fontSize: { xs: "1rem", md: "1.25rem" },
                   lineHeight: 1.8,
                   color: "text.secondary",
                   mb: 4,
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
-                Sou um desenvolvedor em constante evolução, sempre buscando aprender e me aprofundar nas tecnologias do mercado. Atualmente curso Análise e Desenvolvimento de Sistemas pela Universidade Cruzeiro do Sul e atuo como desenvolvedor freelancer, criando soluções práticas e funcionais.
+                Sou um desenvolvedor em constante evolução, sempre buscando
+                aprender e me aprofundar nas tecnologias do mercado. Atualmente
+                curso Análise e Desenvolvimento de Sistemas pela Universidade
+                Cruzeiro do Sul e atuo como desenvolvedor freelancer, criando
+                soluções práticas e funcionais.
               </Typography>
 
               <Box
@@ -150,7 +158,8 @@ const About: React.FC = () => {
                   sx={{
                     fontStyle: "italic",
                     color: "text.secondary",
-                    fontSize: "1.1rem",
+                    fontSize: { xs: "0.95rem", md: "1.1rem" },
+                    textAlign: "center",
                   }}
                 >
                   ✨ Tente mover o mundo – o primeiro passo será mover a si
@@ -158,28 +167,35 @@ const About: React.FC = () => {
                 </Typography>
               </Box>
 
-              <Button
-                component={motion.button}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                variant="contained"
-                startIcon={<DownloadIcon />}
+              <Box
                 sx={{
-                  borderRadius: "30px",
-                  px: 4,
-                  py: 1.5,
-                  fontSize: "1.1rem",
-                  fontWeight: 700,
-                  textTransform: "none",
-                  boxShadow: `0 10px 20px ${alpha(primaryMain, 0.3)}`,
-                  background: `linear-gradient(135deg, ${primaryMain}, ${primaryDark})`,
-                  "&:hover": {
-                    boxShadow: `0 15px 25px ${alpha(primaryMain, 0.4)}`,
-                  },
+                  display: "flex",
+                  justifyContent: { xs: "center", md: "flex-start" },
                 }}
               >
-                Download CV
-              </Button>
+                <Button
+                  component={motion.button}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  variant="contained"
+                  startIcon={<DownloadIcon />}
+                  sx={{
+                    borderRadius: "30px",
+                    px: { xs: 3, md: 4 },
+                    py: 1.5,
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 700,
+                    textTransform: "none",
+                    boxShadow: `0 10px 20px ${alpha(primaryMain, 0.3)}`,
+                    background: `linear-gradient(135deg, ${primaryMain}, ${primaryDark})`,
+                    "&:hover": {
+                      boxShadow: `0 15px 25px ${alpha(primaryMain, 0.4)}`,
+                    },
+                  }}
+                >
+                  Download CV
+                </Button>
+              </Box>
             </Box>
           </Grid>
         </Grid>

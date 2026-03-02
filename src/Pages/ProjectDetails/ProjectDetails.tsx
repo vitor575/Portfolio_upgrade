@@ -62,7 +62,8 @@ const ProjectDetails: React.FC = () => {
           sx={{
             mb: { xs: 4, md: 8 },
             display: "flex",
-            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "flex-start", sm: "center" },
             gap: 2,
           }}
         >
@@ -79,6 +80,7 @@ const ProjectDetails: React.FC = () => {
               color: "text.primary",
               textTransform: "none",
               fontWeight: 600,
+              width: { xs: "100%", sm: "auto" },
               "&:hover": {
                 bgcolor: alpha(primaryMain, 0.1),
                 borderColor: alpha(primaryMain, 0.2),
@@ -93,7 +95,11 @@ const ProjectDetails: React.FC = () => {
                 {">"}
               </Typography>
             }
-            sx={{ color: "text.secondary", fontWeight: 500 }}
+            sx={{
+              color: "text.secondary",
+              fontWeight: 500,
+              display: { xs: "none", sm: "block" },
+            }}
           >
             <Typography sx={{ color: "text.secondary" }}>Projects</Typography>
             <Typography sx={{ color: "text.primary", fontWeight: 600 }}>
@@ -142,7 +148,7 @@ const ProjectDetails: React.FC = () => {
               {/* Stats & Actions - Moved from right side */}
               <Box sx={{ mt: 4, mb: 2 }}>
                 <Grid container spacing={2} sx={{ mb: 3 }}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid size={{ xs: 6 }}>
                     <Box
                       component={motion.div}
                       whileHover={{
@@ -150,13 +156,15 @@ const ProjectDetails: React.FC = () => {
                         backgroundColor: alpha(primaryMain, 0.05),
                       }}
                       sx={{
-                        p: 2.5,
+                        p: { xs: 1.5, sm: 2.5 },
                         borderRadius: "20px",
                         bgcolor: alpha(theme.palette.background.paper, 0.3),
                         border: `1px solid ${alpha(theme.palette.common.white, 0.05)}`,
                         display: "flex",
+                        flexDirection: { xs: "column", sm: "row" },
                         alignItems: "center",
-                        gap: 2,
+                        textAlign: { xs: "center", sm: "left" },
+                        gap: { xs: 1, sm: 2 },
                         transition: "all 0.3s ease",
                       }}
                     >
@@ -168,12 +176,18 @@ const ProjectDetails: React.FC = () => {
                           color: primaryMain,
                         }}
                       >
-                        <CodeIcon />
+                        <CodeIcon
+                          sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" } }}
+                        />
                       </Box>
                       <Box>
                         <Typography
                           variant="h6"
-                          sx={{ fontWeight: 800, lineHeight: 1 }}
+                          sx={{
+                            fontWeight: 800,
+                            lineHeight: 1,
+                            fontSize: { xs: "1rem", sm: "1.25rem" },
+                          }}
                         >
                           {project.stats?.techCount || 0}
                         </Typography>
@@ -183,6 +197,7 @@ const ProjectDetails: React.FC = () => {
                             color: "text.secondary",
                             display: "block",
                             mt: 0.5,
+                            fontSize: { xs: "0.7rem", sm: "0.75rem" },
                           }}
                         >
                           Tecnologias
@@ -190,7 +205,7 @@ const ProjectDetails: React.FC = () => {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid size={{ xs: 6 }}>
                     <Box
                       component={motion.div}
                       whileHover={{
@@ -198,13 +213,15 @@ const ProjectDetails: React.FC = () => {
                         backgroundColor: alpha(secondaryMain, 0.05),
                       }}
                       sx={{
-                        p: 2.5,
+                        p: { xs: 1.5, sm: 2.5 },
                         borderRadius: "20px",
                         bgcolor: alpha(theme.palette.background.paper, 0.3),
                         border: `1px solid ${alpha(theme.palette.common.white, 0.05)}`,
                         display: "flex",
+                        flexDirection: { xs: "column", sm: "row" },
                         alignItems: "center",
-                        gap: 2,
+                        textAlign: { xs: "center", sm: "left" },
+                        gap: { xs: 1, sm: 2 },
                         transition: "all 0.3s ease",
                       }}
                     >
@@ -216,12 +233,18 @@ const ProjectDetails: React.FC = () => {
                           color: secondaryMain,
                         }}
                       >
-                        <LayersIcon />
+                        <LayersIcon
+                          sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" } }}
+                        />
                       </Box>
                       <Box>
                         <Typography
                           variant="h6"
-                          sx={{ fontWeight: 800, lineHeight: 1 }}
+                          sx={{
+                            fontWeight: 800,
+                            lineHeight: 1,
+                            fontSize: { xs: "1rem", sm: "1.25rem" },
+                          }}
                         >
                           {project.stats?.featuresCount || 0}
                         </Typography>
@@ -231,6 +254,7 @@ const ProjectDetails: React.FC = () => {
                             color: "text.secondary",
                             display: "block",
                             mt: 0.5,
+                            fontSize: { xs: "0.7rem", sm: "0.75rem" },
                           }}
                         >
                           Funcionalidades
@@ -249,12 +273,12 @@ const ProjectDetails: React.FC = () => {
                     sx={{
                       flex: { xs: 1, sm: "initial" },
                       borderRadius: "16px",
-                      px: 4,
+                      px: { xs: 2.5, sm: 4 },
                       py: 2,
                       background: `linear-gradient(135deg, ${primaryMain}, ${secondaryMain})`,
                       boxShadow: `0 10px 25px ${alpha(primaryMain, 0.4)}`,
                       textTransform: "none",
-                      fontSize: "1rem",
+                      fontSize: { xs: "0.9rem", sm: "1rem" },
                       fontWeight: 700,
                       "&:hover": {
                         transform: "translateY(-3px)",
@@ -273,12 +297,12 @@ const ProjectDetails: React.FC = () => {
                     sx={{
                       flex: { xs: 1, sm: "initial" },
                       borderRadius: "16px",
-                      px: 4,
+                      px: { xs: 2.5, sm: 4 },
                       py: 2,
                       borderColor: alpha(theme.palette.common.white, 0.1),
                       color: "text.primary",
                       textTransform: "none",
-                      fontSize: "1rem",
+                      fontSize: { xs: "0.9rem", sm: "1rem" },
                       fontWeight: 600,
                       bgcolor: alpha(theme.palette.background.paper, 0.2),
                       "&:hover": {
@@ -396,7 +420,7 @@ const ProjectDetails: React.FC = () => {
                   <Typography
                     variant="h1"
                     sx={{
-                      fontSize: { xs: "2.8rem", md: "3.5rem" },
+                      fontSize: { xs: "2.2rem", sm: "2.8rem", md: "3.5rem" },
                       fontWeight: 900,
                       mb: 2,
                       lineHeight: 1.1,

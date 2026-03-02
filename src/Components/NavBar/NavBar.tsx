@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -17,6 +16,7 @@ import { useTheme, alpha } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { useEffect, useState } from "react";
 
 interface NavBarProps {
   window?: () => Window;
@@ -68,31 +68,63 @@ const NavBar: React.FC<NavBarProps> = () => {
   }, [isProjectPage]);
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        height: "100%",
+        background: `linear-gradient(to bottom, ${alpha(theme.palette.background.default, 0.95)}, ${alpha(theme.palette.background.paper, 0.95)})`,
+        backdropFilter: "blur(10px)",
+        pt: 4,
+      }}
+    >
       <Typography
         variant="h6"
         component={Link}
         to="/"
         sx={{
-          my: 2,
+          mb: 4,
           display: "block",
           textDecoration: "none",
-          color: "inherit",
-          fontWeight: 700,
+          fontWeight: 800,
+          fontSize: "1.8rem",
+          background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
         }}
       >
-        Vitor
+        Vitor Hugo
       </Typography>
-      <List>
+      <List sx={{ px: 2 }}>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item} disablePadding sx={{ mb: 1 }}>
             <ListItemButton
-              sx={{ textAlign: "center" }}
+              sx={{
+                textAlign: "center",
+                borderRadius: "12px",
+                bgcolor:
+                  activeSection === item
+                    ? alpha(theme.palette.primary.main, 0.1)
+                    : "transparent",
+                color:
+                  activeSection === item
+                    ? theme.palette.primary.main
+                    : theme.palette.text.primary,
+                "&:hover": {
+                  bgcolor: alpha(theme.palette.primary.main, 0.05),
+                },
+              }}
               component={HashLink}
               smooth
               to={`/#${item.toLowerCase()}`}
             >
-              <ListItemText primary={item} />
+              <ListItemText
+                primary={item}
+                primaryTypographyProps={{
+                  fontWeight: activeSection === item ? 700 : 500,
+                  fontSize: "1.1rem",
+                }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -197,6 +229,7 @@ const NavBar: React.FC<NavBarProps> = () => {
       <Box component="nav">
         <Drawer
           variant="temporary"
+          anchor="right"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
@@ -204,7 +237,13 @@ const NavBar: React.FC<NavBarProps> = () => {
           }}
           sx={{
             display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": { boxSizing: "border-box", width: 240 },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: "280px",
+              bgcolor: "transparent",
+              backgroundImage: "none",
+              boxShadow: "none",
+            },
           }}
         >
           {drawer}

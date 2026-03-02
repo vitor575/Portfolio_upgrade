@@ -85,78 +85,91 @@ const ProjectsStack: React.FC = () => {
           sx={{
             display: "flex",
             justifyContent: "center",
-            mb: 8,
+            mb: { xs: 4, md: 8 },
           }}
         >
           <Box
             sx={{
               display: "flex",
-              p: 0.8,
+              p: 0.6,
               borderRadius: "16px",
               bgcolor: alpha(theme.palette.background.paper, 0.3),
               backdropFilter: "blur(20px)",
               border: `1px solid ${alpha(theme.palette.common.white, 0.05)}`,
-              gap: 1,
+              gap: 0.5,
+              width: { xs: "100%", sm: "auto" },
             }}
           >
             {[
-              { id: "projects", label: "Projetos", icon: <CodeIcon /> },
-              { id: "stack", label: "Tech Stack", icon: <StorageIcon /> },
-            ].map((tab) => (
-              <Box
-                key={tab.id}
-                component={motion.button}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveTab(tab.id as "projects" | "stack")}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1.5,
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: "12px",
-                  cursor: "pointer",
-                  border: "none",
-                  transition: "all 0.3s ease",
-                  bgcolor:
-                    activeTab === tab.id
-                      ? alpha(primaryMain, 0.1)
-                      : "transparent",
-                  color: activeTab === tab.id ? primaryMain : "text.secondary",
-                  position: "relative",
-                  "&::before":
-                    activeTab === tab.id
-                      ? {
-                          content: '""',
-                          position: "absolute",
-                          inset: 0,
-                          background: `linear-gradient(135deg, ${alpha(primaryMain, 0.1)}, ${alpha(secondaryMain, 0.05)})`,
-                          zIndex: -1,
-                        }
-                      : {},
-                }}
-              >
-                {tab.icon}
-                <Typography sx={{ fontWeight: 700, fontSize: "1.1rem" }}>
-                  {tab.label}
-                </Typography>
-                {activeTab === tab.id && (
-                  <Box
-                    component={motion.div}
-                    layoutId="activeTab"
+              { id: "projects", label: "Projetos", icon: CodeIcon },
+              { id: "stack", label: "Tech Stack", icon: StorageIcon },
+            ].map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <Box
+                  key={tab.id}
+                  component={motion.button}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setActiveTab(tab.id as "projects" | "stack")}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 1,
+                    flex: { xs: 1, sm: "initial" },
+                    px: { xs: 2, sm: 4 },
+                    py: 1.2,
+                    borderRadius: "12px",
+                    cursor: "pointer",
+                    border: "none",
+                    transition: "all 0.3s ease",
+                    bgcolor:
+                      activeTab === tab.id
+                        ? alpha(primaryMain, 0.1)
+                        : "transparent",
+                    color:
+                      activeTab === tab.id ? primaryMain : "text.secondary",
+                    position: "relative",
+                    "&::before":
+                      activeTab === tab.id
+                        ? {
+                            content: '""',
+                            position: "absolute",
+                            inset: 0,
+                            background: `linear-gradient(135deg, ${alpha(primaryMain, 0.1)}, ${alpha(secondaryMain, 0.05)})`,
+                            zIndex: -1,
+                            borderRadius: "12px",
+                          }
+                        : {},
+                  }}
+                >
+                  <Icon sx={{ fontSize: { xs: "1.2rem", md: "1.5rem" } }} />
+                  <Typography
                     sx={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: "10%",
-                      right: "10%",
-                      height: "2px",
-                      background: `linear-gradient(90deg, ${primaryMain}, ${secondaryMain})`,
+                      fontWeight: 700,
+                      fontSize: { xs: "0.95rem", md: "1.1rem" },
                     }}
-                  />
-                )}
-              </Box>
-            ))}
+                  >
+                    {tab.label}
+                  </Typography>
+                  {activeTab === tab.id && (
+                    <Box
+                      component={motion.div}
+                      layoutId="activeTab"
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: "10%",
+                        right: "10%",
+                        height: "2px",
+                        background: `linear-gradient(90deg, ${primaryMain}, ${secondaryMain})`,
+                      }}
+                    />
+                  )}
+                </Box>
+              );
+            })}
           </Box>
         </Box>
 
@@ -192,7 +205,7 @@ const ProjectsStack: React.FC = () => {
                   >
                     <Box
                       sx={{
-                        height: "240px",
+                        height: { xs: "200px", md: "240px" },
                         position: "relative",
                         overflow: "hidden",
                       }}

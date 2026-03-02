@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { ColorModeContext, useMode } from "./tema";
-import { CssBaseline, ThemeProvider, Box, alpha } from "@mui/material";
+import {
+  CssBaseline,
+  ThemeProvider,
+  Box,
+  alpha,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import {
   AnimatePresence,
   motion,
@@ -134,6 +141,9 @@ const BlobItem = ({
 
 const GlobalBackground = () => {
   const { scrollYProgress } = useScroll();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 80,
     damping: 25,
@@ -143,7 +153,7 @@ const GlobalBackground = () => {
   const blobs: BlobConfig[] = [
     {
       color: "#6366f1",
-      size: "600px",
+      size: isMobile ? "300px" : "600px",
       initialPos: { top: "10%", left: "-10%" },
       moveX: ["0vw", "110vw", "20vw"],
       moveY: ["0vh", "30vh", "80vh"],
@@ -151,7 +161,7 @@ const GlobalBackground = () => {
     },
     {
       color: "#a855f7",
-      size: "750px",
+      size: isMobile ? "350px" : "750px",
       initialPos: { top: "50%", right: "-15%" },
       moveX: ["0vw", "-120vw", "-40vw"],
       moveY: ["0vh", "-40vh", "20vh"],
@@ -159,7 +169,7 @@ const GlobalBackground = () => {
     },
     {
       color: "#ec4899",
-      size: "500px",
+      size: isMobile ? "250px" : "500px",
       initialPos: { top: "80%", left: "10%" },
       moveX: ["0vw", "80vw", "-20vw"],
       moveY: ["0vh", "-70vh", "-30vh"],
@@ -167,7 +177,7 @@ const GlobalBackground = () => {
     },
     {
       color: "#3b82f6",
-      size: "650px",
+      size: isMobile ? "300px" : "650px",
       initialPos: { top: "-10%", left: "30%" },
       moveX: ["0vw", "40vw", "-50vw"],
       moveY: ["0vh", "110vh", "50vh"],
@@ -175,7 +185,7 @@ const GlobalBackground = () => {
     },
     {
       color: "#8b5cf6",
-      size: "700px",
+      size: isMobile ? "350px" : "700px",
       initialPos: { bottom: "-10%", right: "10%" },
       moveX: ["0vw", "-90vw", "30vw"],
       moveY: ["0vh", "-110vh", "-50vh"],
@@ -183,7 +193,7 @@ const GlobalBackground = () => {
     },
     {
       color: "#d946ef",
-      size: "550px",
+      size: isMobile ? "250px" : "550px",
       initialPos: { top: "20%", left: "20%" },
       moveX: ["0vw", "-40vw", "90vw"],
       moveY: ["0vh", "80vh", "-20vh"],
@@ -191,7 +201,7 @@ const GlobalBackground = () => {
     },
     {
       color: "#6366f1",
-      size: "600px",
+      size: isMobile ? "300px" : "600px",
       initialPos: { top: "40%", right: "40%" },
       moveX: ["0vw", "60vw", "-80vw"],
       moveY: ["0vh", "-50vh", "90vh"],
@@ -199,7 +209,7 @@ const GlobalBackground = () => {
     },
     {
       color: "#ec4899",
-      size: "450px",
+      size: isMobile ? "200px" : "450px",
       initialPos: { top: "90%", right: "10%" },
       moveX: ["0vw", "-110vw", "20vw"],
       moveY: ["0vh", "-90vh", "10vh"],

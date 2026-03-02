@@ -115,7 +115,7 @@ const Contact: React.FC = () => {
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        <Box sx={{ textAlign: "center", mb: 8 }}>
+        <Box sx={{ textAlign: "center", mb: { xs: 4, md: 8 } }}>
           <Typography
             component={motion.h2}
             initial={{ opacity: 0, y: -30, scale: 0.8 }}
@@ -123,12 +123,13 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             sx={{
-              fontSize: { xs: "2.5rem", md: "4.5rem" },
+              fontSize: { xs: "2.2rem", sm: "3.5rem", md: "4.5rem" },
               fontWeight: 800,
               background: `linear-gradient(90deg, ${primaryMain}, ${secondaryMain})`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               mb: 2,
+              lineHeight: 1.2,
             }}
           >
             Entre em Contato
@@ -140,11 +141,12 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             sx={{
-              fontSize: { xs: "1.1rem", md: "1.3rem" },
+              fontSize: { xs: "1rem", sm: "1.1rem", md: "1.3rem" },
               color: "text.secondary",
               maxWidth: "600px",
               mx: "auto",
               pb: 2,
+              px: { xs: 2, sm: 0 },
               position: "relative",
               "&::after": {
                 content: '""',
@@ -152,7 +154,7 @@ const Contact: React.FC = () => {
                 bottom: -10,
                 left: "50%",
                 transform: "translateX(-50%)",
-                width: "20rem",
+                width: { xs: "12rem", sm: "20rem" },
                 height: "3px",
                 borderRadius: "2px",
                 background: `linear-gradient(90deg, ${primaryMain}, ${secondaryMain})`,
@@ -197,6 +199,7 @@ const Contact: React.FC = () => {
                       fontWeight: 700,
                       color: alpha(primaryMain, 0.9),
                       mb: 1,
+                      fontSize: { xs: "1.5rem", sm: "2rem", md: "2.125rem" },
                     }}
                   >
                     Contato
@@ -206,7 +209,12 @@ const Contact: React.FC = () => {
                     conversar.
                   </Typography>
                 </Box>
-                <IconButton sx={{ color: alpha(primaryMain, 0.6) }}>
+                <IconButton
+                  sx={{
+                    color: alpha(primaryMain, 0.6),
+                    display: { xs: "none", sm: "inline-flex" },
+                  }}
+                >
                   <ShareIcon />
                 </IconButton>
               </Box>
@@ -530,7 +538,7 @@ const Contact: React.FC = () => {
                           sx={{
                             color: "text.primary",
                             fontWeight: 700,
-                            fontSize: "1.2rem",
+                            fontSize: { xs: "1rem", sm: "1.2rem" },
                           }}
                         >
                           Github
