@@ -17,7 +17,7 @@ const About: React.FC = () => {
       component={motion.section}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: false, amount: 0.3 }}
       transition={{ duration: 0.6 }}
       sx={{
         minHeight: "100vh",
@@ -36,7 +36,7 @@ const About: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8, x: -50 }}
               whileInView={{ opacity: 1, scale: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <Box
@@ -85,7 +85,7 @@ const About: React.FC = () => {
                 component={motion.h2}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.6 }}
                 sx={{
                   fontWeight: 800,
@@ -104,7 +104,7 @@ const About: React.FC = () => {
                 component={motion.p}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 sx={{
                   fontSize: { xs: "1rem", md: "1.3rem" },
@@ -122,7 +122,7 @@ const About: React.FC = () => {
                 component={motion.p}
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
                 sx={{
                   fontSize: { xs: "1rem", md: "1.25rem" },
@@ -143,7 +143,7 @@ const About: React.FC = () => {
                 component={motion.div}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 sx={{
                   p: 3,

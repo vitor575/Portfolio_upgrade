@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
       component={motion.section}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.1 }}
       transition={{ duration: 0.6 }}
       sx={{
         minHeight: "100vh",
@@ -120,7 +120,7 @@ const Contact: React.FC = () => {
             component={motion.h2}
             initial={{ opacity: 0, y: -30, scale: 0.8 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             sx={{
               fontSize: { xs: "2.2rem", sm: "3.5rem", md: "4.5rem" },
@@ -138,7 +138,7 @@ const Contact: React.FC = () => {
             component={motion.p}
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             sx={{
               fontSize: { xs: "1rem", sm: "1.1rem", md: "1.3rem" },
@@ -171,7 +171,7 @@ const Contact: React.FC = () => {
               component={motion.div}
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
               sx={{
                 p: { xs: 4, md: 6 },

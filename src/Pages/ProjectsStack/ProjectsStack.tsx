@@ -70,7 +70,7 @@ const ProjectsStack: React.FC = () => {
       component={motion.section}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.1 }}
       transition={{ duration: 0.6 }}
       sx={{
         py: 12,
@@ -186,7 +186,19 @@ const ProjectsStack: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               {projects.map((project, index) => (
-                <Grid size={{ xs: 12, md: 6 }} key={index}>
+                <Grid
+                  size={{ xs: 12, md: 6 }}
+                  key={index}
+                  component={motion.div}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: false, margin: "-100px" }}
+                  transition={{
+                    duration: 0.8,
+                    ease: "easeOut",
+                    delay: index * 0.1,
+                  }}
+                >
                   <Box
                     sx={{
                       borderRadius: 4,
@@ -195,6 +207,8 @@ const ProjectsStack: React.FC = () => {
                       border: `1px solid ${alpha(theme.palette.common.white, 0.05)}`,
                       overflow: "hidden",
                       height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
                       transition: "all 0.3s ease",
                       "&:hover": {
                         transform: "translateY(-10px)",
@@ -222,7 +236,14 @@ const ProjectsStack: React.FC = () => {
                         }}
                       />
                     </Box>
-                    <Box sx={{ p: 3 }}>
+                    <Box
+                      sx={{
+                        p: 3,
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
                       <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
                         {project.title}
                       </Typography>
@@ -230,8 +251,8 @@ const ProjectsStack: React.FC = () => {
                         variant="body1"
                         sx={{
                           color: "text.secondary",
-                          mb: 3,
-                          minHeight: "60px",
+                          mb: 4,
+                          flex: 1,
                         }}
                       >
                         {project.description}
@@ -241,6 +262,9 @@ const ProjectsStack: React.FC = () => {
                           display: "flex",
                           justifyContent: "space-between",
                           alignItems: "center",
+                          mt: "auto",
+                          pt: 2,
+                          borderTop: `1px solid ${alpha(theme.palette.common.white, 0.05)}`,
                         }}
                       >
                         <Button
@@ -251,7 +275,13 @@ const ProjectsStack: React.FC = () => {
                             color: primaryMain,
                             fontWeight: 700,
                             textTransform: "none",
-                            "&:hover": { bgcolor: alpha(primaryMain, 0.05) },
+                            px: 2,
+                            borderRadius: "10px",
+                            "&:hover": {
+                              bgcolor: alpha(primaryMain, 0.08),
+                              transform: "translateX(5px)",
+                            },
+                            transition: "all 0.3s ease",
                           }}
                         >
                           Live Demo
@@ -259,18 +289,36 @@ const ProjectsStack: React.FC = () => {
                         <Button
                           component={Link}
                           to={`/project/${project.slug}`}
-                          variant="outlined"
+                          variant="contained"
                           endIcon={<ArrowForwardIcon />}
                           sx={{
-                            borderRadius: 2,
-                            borderColor: alpha(primaryMain, 0.3),
-                            color: "text.primary",
+                            borderRadius: "12px",
+                            background: `linear-gradient(90deg, ${primaryMain} 0%, ${secondaryMain} 50%, ${primaryMain} 100%)`,
+                            backgroundSize: "200% 100%",
+                            backgroundPosition: "0% 0%",
+                            color: "white",
                             textTransform: "none",
-                            fontWeight: 600,
+                            fontWeight: 700,
+                            px: 3,
+                            py: 1,
+                            boxShadow: `0 4px 15px ${alpha(primaryMain, 0.3)}`,
+                            animation: "slideLeftExit 0.5s forwards ease-out",
                             "&:hover": {
-                              borderColor: primaryMain,
-                              bgcolor: alpha(primaryMain, 0.05),
+                              animation:
+                                "slideLeftHover 0.5s forwards ease-out",
+                              boxShadow: `0 8px 25px ${alpha(primaryMain, 0.4)}`,
+                              transform: "translateY(-2px)",
                             },
+                            "@keyframes slideLeftHover": {
+                              from: { backgroundPosition: "0% 0%" },
+                              to: { backgroundPosition: "100% 0%" },
+                            },
+                            "@keyframes slideLeftExit": {
+                              from: { backgroundPosition: "100% 0%" },
+                              to: { backgroundPosition: "200% 0%" },
+                            },
+                            transition:
+                              "transform 0.3s ease, box-shadow 0.3s ease",
                           }}
                         >
                           Detalhes

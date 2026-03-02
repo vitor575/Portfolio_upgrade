@@ -61,12 +61,13 @@ const TimelineCard: React.FC<{ item: ExperienceItem; index: number }> = ({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: false, amount: 0.3 }}
       sx={{
         display: "flex",
         gap: { xs: 3, md: 5 },
         mb: 8,
         position: "relative",
+        zIndex: 2,
       }}
     >
       {/* Icon and Line Section */}
@@ -189,6 +190,11 @@ const Experience: React.FC = () => {
         <Box sx={{ position: "relative", mt: 5 }}>
           {/* Vertical Line */}
           <Box
+            component={motion.div}
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
             sx={{
               position: "absolute",
               left: { xs: 24, md: 29 },
@@ -197,6 +203,7 @@ const Experience: React.FC = () => {
               width: "2px",
               background: `linear-gradient(to bottom, ${alpha(theme.palette.primary.main, 1)} 0%, ${alpha(theme.palette.secondary.main, 1)} 100%)`,
               zIndex: 1,
+              transformOrigin: "top",
             }}
           />
 
