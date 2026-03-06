@@ -11,7 +11,7 @@ import { useTheme, alpha } from "@mui/material/styles";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface HeroProps {
   illustrationSrc?: string;

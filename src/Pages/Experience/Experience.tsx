@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Container, Typography, alpha, useTheme } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 
@@ -201,7 +201,7 @@ const Experience: React.FC = () => {
               top: 30,
               bottom: 0,
               width: "2px",
-              background: `linear-gradient(to bottom, ${alpha(theme.palette.primary.main, 1)} 0%, ${alpha(theme.palette.secondary.main, 1)} 100%)`,
+              background: `linear-gradient(to bottom, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
               zIndex: 1,
               transformOrigin: "top",
             }}

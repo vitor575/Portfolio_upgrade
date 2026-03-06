@@ -10,7 +10,7 @@ import {
   useTheme,
   Breadcrumbs,
 } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LaunchIcon from "@mui/icons-material/Launch";
 import GitHubIcon from "@mui/icons-material/GitHub";

@@ -13,7 +13,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useTheme, alpha } from "@mui/material/styles";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";

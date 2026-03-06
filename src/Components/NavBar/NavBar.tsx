@@ -120,9 +120,11 @@ const NavBar: React.FC<NavBarProps> = () => {
             >
               <ListItemText
                 primary={item}
-                primaryTypographyProps={{
-                  fontWeight: activeSection === item ? 700 : 500,
-                  fontSize: "1.1rem",
+                slotProps={{
+                  primary: {
+                    fontWeight: activeSection === item ? 700 : 500,
+                    fontSize: "1.1rem",
+                  },
                 }}
               />
             </ListItemButton>
@@ -133,7 +135,7 @@ const NavBar: React.FC<NavBarProps> = () => {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", pt: 2 }}>
       <AppBar
         component="nav"
         sx={{

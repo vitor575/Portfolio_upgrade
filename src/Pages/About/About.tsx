@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { useTheme, alpha } from "@mui/material/styles";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import DownloadIcon from "@mui/icons-material/Download";
 
 const About: React.FC = () => {
@@ -174,11 +174,13 @@ const About: React.FC = () => {
                 }}
               >
                 <Button
-                  component={motion.button}
+                  component={motion.a}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   variant="contained"
                   startIcon={<DownloadIcon />}
+                  href="/Curriculo_vitor.pdf"
+                  download="Curriculo_Vitor_Hugo.pdf"
                   sx={{
                     borderRadius: "30px",
                     px: { xs: 3, md: 4 },

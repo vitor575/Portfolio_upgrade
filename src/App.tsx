@@ -15,7 +15,7 @@ import {
   useSpring,
   useTransform,
   MotionValue,
-} from "framer-motion";
+} from "motion/react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Splash from "./Components/Splash/Splash";
 import NavBar from "./Components/NavBar/NavBar";
