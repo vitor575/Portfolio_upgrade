@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -9,6 +9,8 @@ import {
   alpha,
   useTheme,
   Breadcrumbs,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
 import { motion } from "motion/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -17,12 +19,22 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import CodeIcon from "@mui/icons-material/Code";
 import LayersIcon from "@mui/icons-material/Layers";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import KeyIcon from "@mui/icons-material/Key";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import CheckIcon from "@mui/icons-material/Check";
 import { projects } from "../../data/projects";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const theme = useTheme();
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const handleCopy = (value: string, field: string) => {
+    navigator.clipboard.writeText(value);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
   const project = projects.find((p) => p.slug === slug);
 
   const primaryMain = theme.palette.primary.main;
@@ -264,58 +276,126 @@ const ProjectDetails: React.FC = () => {
                   </Grid>
                 </Grid>
 
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-                  <Button
-                    href={project.live}
-                    target="_blank"
-                    variant="contained"
-                    startIcon={<LaunchIcon />}
+                {/* Demo Credentials */}
+                {project.demoCredentials && (
+                  <Box
+                    component={motion.div}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
                     sx={{
-                      flex: { xs: 1, sm: "initial" },
-                      borderRadius: "16px",
-                      px: { xs: 2.5, sm: 4 },
-                      py: 2,
-                      background: `linear-gradient(135deg, ${primaryMain}, ${secondaryMain})`,
-                      boxShadow: `0 10px 25px ${alpha(primaryMain, 0.4)}`,
-                      textTransform: "none",
-                      fontSize: { xs: "0.9rem", sm: "1rem" },
-                      fontWeight: 700,
-                      "&:hover": {
-                        transform: "translateY(-3px)",
-                        boxShadow: `0 15px 30px ${alpha(primaryMain, 0.5)}`,
+                      p: 3,
+                      borderRadius: "20px",
+                      background: `linear-gradient(135deg, ${alpha(primaryMain, 0.08)}, ${alpha(secondaryMain, 0.08)})`,
+                      border: `1px solid ${alpha(primaryMain, 0.2)}`,
+                      position: "relative",
+                      overflow: "hidden",
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: "2px",
+                        background: `linear-gradient(90deg, ${primaryMain}, ${secondaryMain})`,
                       },
-                      transition: "all 0.3s ease",
                     }}
                   >
-                    Live Demo
-                  </Button>
-                  <Button
-                    href={project.github}
-                    target="_blank"
-                    variant="outlined"
-                    startIcon={<GitHubIcon />}
-                    sx={{
-                      flex: { xs: 1, sm: "initial" },
-                      borderRadius: "16px",
-                      px: { xs: 2.5, sm: 4 },
-                      py: 2,
-                      borderColor: alpha(theme.palette.common.white, 0.1),
-                      color: "text.primary",
-                      textTransform: "none",
-                      fontSize: { xs: "0.9rem", sm: "1rem" },
-                      fontWeight: 600,
-                      bgcolor: alpha(theme.palette.background.paper, 0.2),
-                      "&:hover": {
-                        borderColor: primaryMain,
-                        bgcolor: alpha(primaryMain, 0.05),
-                        transform: "translateY(-3px)",
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontWeight: 700,
+                        mb: 2.5,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        color: "text.primary",
+                      }}
+                    >
+                      <KeyIcon
+                        fontSize="small"
+                        sx={{
+                          color: primaryMain,
+                          filter: `drop-shadow(0 0 6px ${alpha(primaryMain, 0.6)})`,
+                        }}
+                      />
+                      Acesso Demo
+                    </Typography>
+
+                    {[
+                      {
+                        label: "E-mail",
+                        value: project.demoCredentials.email,
+                        field: "email",
                       },
-                      transition: "all 0.3s ease",
-                    }}
-                  >
-                    Github
-                  </Button>
-                </Box>
+                      {
+                        label: "Senha",
+                        value: project.demoCredentials.password,
+                        field: "password",
+                      },
+                    ].map(({ label, value, field }) => (
+                      <Box
+                        key={field}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          mb: 1.5,
+                          p: 1.5,
+                          borderRadius: "12px",
+                          bgcolor: alpha(theme.palette.background.paper, 0.4),
+                          border: `1px solid ${alpha(theme.palette.common.white, 0.06)}`,
+                        }}
+                      >
+                        <Box>
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: "text.secondary",
+                              display: "block",
+                              mb: 0.2,
+                            }}
+                          >
+                            {label}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontWeight: 600,
+                              fontFamily: "monospace",
+                              letterSpacing: 0.5,
+                            }}
+                          >
+                            {value}
+                          </Typography>
+                        </Box>
+                        <Tooltip
+                          title={copiedField === field ? "Copiado!" : "Copiar"}
+                          placement="left"
+                        >
+                          <IconButton
+                            size="small"
+                            onClick={() => handleCopy(value, field)}
+                            sx={{
+                              color:
+                                copiedField === field
+                                  ? secondaryMain
+                                  : "text.secondary",
+                              transition: "color 0.3s ease",
+                              "&:hover": { color: primaryMain },
+                            }}
+                          >
+                            {copiedField === field ? (
+                              <CheckIcon fontSize="small" />
+                            ) : (
+                              <ContentCopyIcon fontSize="small" />
+                            )}
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                    ))}
+                  </Box>
+                )}
               </Box>
 
               {/* Technologies - More dynamic layout */}
@@ -377,6 +457,60 @@ const ProjectDetails: React.FC = () => {
                     </Box>
                   ))}
                 </Box>
+              </Box>
+
+              {/* Action Buttons */}
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mt: 4 }}>
+                <Button
+                  href={project.live}
+                  target="_blank"
+                  variant="contained"
+                  startIcon={<LaunchIcon />}
+                  sx={{
+                    flex: { xs: 1, sm: "initial" },
+                    borderRadius: "16px",
+                    px: { xs: 2.5, sm: 4 },
+                    py: 2,
+                    background: `linear-gradient(135deg, ${primaryMain}, ${secondaryMain})`,
+                    boxShadow: `0 10px 25px ${alpha(primaryMain, 0.4)}`,
+                    textTransform: "none",
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    fontWeight: 700,
+                    "&:hover": {
+                      transform: "translateY(-3px)",
+                      boxShadow: `0 15px 30px ${alpha(primaryMain, 0.5)}`,
+                    },
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  Live Demo
+                </Button>
+                <Button
+                  href={project.github}
+                  target="_blank"
+                  variant="outlined"
+                  startIcon={<GitHubIcon />}
+                  sx={{
+                    flex: { xs: 1, sm: "initial" },
+                    borderRadius: "16px",
+                    px: { xs: 2.5, sm: 4 },
+                    py: 2,
+                    borderColor: alpha(theme.palette.common.white, 0.1),
+                    color: "text.primary",
+                    textTransform: "none",
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    fontWeight: 600,
+                    bgcolor: alpha(theme.palette.background.paper, 0.2),
+                    "&:hover": {
+                      borderColor: primaryMain,
+                      bgcolor: alpha(primaryMain, 0.05),
+                      transform: "translateY(-3px)",
+                    },
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  Github
+                </Button>
               </Box>
             </motion.div>
           </Grid>

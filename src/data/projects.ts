@@ -53,4 +53,30 @@ export const projects = [
       featuresCount: 1,
     },
   },
+  {
+    slug: "Athletic force",
+    title: "Athletic force",
+    description:
+      "Projeto de gerenciamento de rotinas de treino para academias, desenvolvido com React, TypeScript e Material UI no front-end e Java com Spring Boot no back-end, oferecendo uma interface moderna para organização, acompanhamento e administração de treinos.",
+    extendedDescription:
+      "Aplicação web para gerenciamento e administração de rotinas de treino em academias, desenvolvida com React, TypeScript e Material UI no front-end e Java com Spring Boot no back-end. O sistema permite a criação e gerenciamento completo de treinos através de operações CRUD, organizando exercícios por grupos musculares e permitindo a montagem de rotinas personalizadas para dias específicos da semana ou treinos isolados.",
+    image: "/ProjectsPhotos/Athletic_force.png",
+    live: "https://athletic-force.vercel.app",
+    github: "https://github.com/vitor575/athletic-force",
+    tech: ["TypeScript", "React", "Material UI", "Java", "Spring Boot"],
+    features: [
+      "CRUD de exercícios, treinos e rotinas",
+      "Design responsivo para todos os dispositivos",
+      "Controle de acesso",
+      "Níveis de acesso",
+    ],
+    demoCredentials: {
+      email: "vitor2@gmail.com",
+      password: "123456",
+    },
+    stats: {
+      techCount: 5,
+      featuresCount: 4,
+    },
+  },
 ];
